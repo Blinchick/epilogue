@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DeletePost from '../common/DeletePost';
 import firebase from '../firebase.js';
 
 class Post extends Component {
@@ -22,12 +23,15 @@ class Post extends Component {
             // pushing postscripts from firebase to local state
             for (let i in data) {
                     posts.push({
+                        postId: i,
                         postscripts: data[i].postscript
                     });
 
                 this.setState({
                     postscripts: posts
                 });
+
+                console.log(posts)
             }
         })
     }
@@ -37,7 +41,11 @@ class Post extends Component {
             <div>
                 {this.state.postscripts.map((post) => {
                     return (
-                        <p>{post.postscripts}</p>
+                        <React.Fragment>
+                            <p>{post.postscripts}</p>
+                            <DeletePost post={post}
+                            bookId={this.state.singleBookId}/>
+                        </React.Fragment>
                     )
                 })}
             </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../firebase.js';
-
+import Delete from '../common/Delete';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
@@ -56,8 +56,6 @@ class Books extends Component {
     handleSubmit = e => {
         e.preventDefault();
         const newBook = firebase.database().ref('/books');
-        //just to alert user that it's submitted
-        alert('Submited!');
         //adding to firebase
         newBook.push({
             title: this.state.title,
@@ -88,8 +86,10 @@ class Books extends Component {
                                     <Link
                                         to={`/books/${book.bookId}`}
                                     >
-                                        <i class="fas fa-pen-nib" title="write your P.S."></i>
+                                        <i className="fas fa-pen-nib" title="write your P.S."></i>
+
                                     </Link>
+                                    <Delete book={book}/>
                                 </div>
                             )
                         })
@@ -117,7 +117,7 @@ class Books extends Component {
                             placeholder="Add Writer"
                         />
                         <br />
-                        <button onClick={this.handleSubmit} type="submit">Submit</button>
+                        <button onClick={this.handleSubmit} type="submit" className="submit">Submit</button>
                     </form>
                 </div>
                 <Link className="linkBack" exact to="/">Back</Link>

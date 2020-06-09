@@ -44,7 +44,7 @@ i:hover {
   color: #32102F
 }
 
-button {
+button.submit {
   background-color: #32102F;
   border: 2px solid #32102F;
   border-radius: 10%;
@@ -54,6 +54,12 @@ button {
   color: white;
   cursor: pointer;
   margin-left: 100px;
+}
+
+button.delete {
+  border: none;
+  background-color: #B8AC73;
+  cursor: pointer;
 }
 
 /* landing age styles */

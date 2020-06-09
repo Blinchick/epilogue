@@ -76,7 +76,7 @@ class singleBook extends Component {
                         onChange={this.handleChange}
                     >
                     </textarea>
-                    <button type="submit">ADD</button>
+                    <button type="submit" className="submit">ADD</button>
                 </form>
 
                 {this.state.singleBook.map((book) => {
