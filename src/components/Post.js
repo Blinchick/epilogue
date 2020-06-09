@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DeletePost from '../common/DeletePost';
+import ChangePost from '../common/ChangePost';
 import firebase from '../firebase.js';
 
 class Post extends Component {
@@ -30,10 +30,20 @@ class Post extends Component {
                 this.setState({
                     postscripts: posts
                 });
-
-                console.log(posts)
             }
         })
+    }
+
+    componentWillUnmount() {
+        const dbRef = firebase.database().ref('/books');
+        dbRef.off()
+    }
+
+    handleChange = e => {
+        console.log(e.target.value)
+        this.setState({
+            [e.target.name]: e.target.value
+        });
     }
 
     render() {
@@ -43,14 +53,40 @@ class Post extends Component {
                     return (
                         <React.Fragment>
                             <p>{post.postscripts}</p>
-                            <DeletePost post={post}
-                            bookId={this.state.singleBookId}/>
+                            <form action="">
+                                <label htmlFor="update" className="sr-only">Update</label>
+                                <textarea
+                                // inline style to make handleModify works
+                                    style={textareaStyle}
+                                    className="update" 
+                                    name="update"
+                                    // need to access id for modifying
+                                    id={post.postId}
+                                    cols="10" 
+                                    rows="5"
+                                    onChange={this.handleChange}
+                                    // using defaultValue to allow changes in a textfield
+                                    defaultValue={post.postscripts}
+                                >
+                                </textarea>
+                                <ChangePost 
+                                    post={post}
+                                    bookId={this.state.singleBookId}
+                                    newValue={this.state.update}
+                                />
+                            </form>
                         </React.Fragment>
                     )
                 })}
             </div>
         )
     }
+
+}
+
+// iline style for textarea
+const textareaStyle = {
+    display: 'none'
 }
 
 export default Post;

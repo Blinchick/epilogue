@@ -44,22 +44,11 @@ i:hover {
   color: #32102F
 }
 
-button.submit {
-  background-color: #32102F;
-  border: 2px solid #32102F;
-  border-radius: 10%;
-  padding: 1rem 2rem;
+textarea {
+  resize: none;
+  border: 2px solid #B8AC73;
   font-family: 'Special Elite', cursive;
-  font-size: 20px;
-  color: white;
-  cursor: pointer;
-  margin-left: 100px;
-}
-
-button.delete {
-  border: none;
-  background-color: #B8AC73;
-  cursor: pointer;
+  font-size: 18px;
 }
 
 /* landing age styles */
@@ -123,16 +112,36 @@ button.delete {
 }
 
 .oneBook div,
-.singlePost p {
+.singlePost p,
+textarea {
   background: #B8AC73;
   border-radius: 10px;
   padding: 1rem;
   margin: 1rem 0;
-  max-height: 40vh;
-  min-width: 250px;
-  max-width: 300px;
+  min-width: 300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* action buttons and form fields */
+
+button.delete,
+button.update,
+button.modify {
+  border: none;
+  background-color: #B8AC73;
+  cursor: pointer;
+}
+
+button.submit {
+  background-color: #32102F;
+  border: 2px solid #32102F;
+  border-radius: 10%;
+  padding: 1rem 2rem;
+  font-family: 'Special Elite', cursive;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  margin-left: 100px;
+}
