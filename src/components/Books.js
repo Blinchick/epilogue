@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../firebase.js';
+
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
@@ -9,8 +10,7 @@ class Books extends Component {
         this.state = {
             title: "",
             writer: "",
-            postscript: "",
-
+            poscript: "",
             // to display books
             allBooks: [] 
         };
@@ -19,28 +19,29 @@ class Books extends Component {
     // displaying books currently in the database
     componentDidMount() {
         //set up listener to firebase database
-        const dbRef = firebase.database().ref();
+
+        const dbRef = firebase.database().ref('/books');
         dbRef.on('value', (result) => {
 
             let data = result.val();
-            let posts = [];
+            let books = [];
 
             for (let i in data) {
-                posts.push({
-                    postId: i,
+                books.push({
+                    bookId: i,
                     title: data[i].title,
                     writer: data[i].writer
                 });
 
                 this.setState({
-                    allBooks: posts
+                    allBooks: books
                 });
             }
         })
     }
 
     componentWillUnmount() {
-        const dbRef = firebase.database().ref();
+        const dbRef = firebase.database().ref('/books');
         dbRef.off()
     }
 
@@ -54,8 +55,7 @@ class Books extends Component {
     //on submit we are saving our form to firebase
     handleSubmit = e => {
         e.preventDefault();
-        const newBook = firebase.database().ref();
-        console.log(firebase.database())
+        const newBook = firebase.database().ref('/books');
         //just to alert user that it's submitted
         alert('Submited!');
         //adding to firebase
@@ -99,10 +99,15 @@ class Books extends Component {
                     onClick={this.handleBook}
                 >
                     {
-                        this.state.allBooks.map((post) => {
+                        this.state.allBooks.map((book) => {
                             return (
-                                <div className="post">
-                                    <p><strong>{post.title}</strong> by <strong>{post.writer}</strong></p>
+                                <div className={`books + ${book.bookId}`} id={`${book.bookId}`}>
+                                    <p><strong>{book.title}</strong> by <strong>{book.writer}</strong></p>
+                                    <Link
+                                        to={`/books/${book.bookId}`}
+                                    >
+                                        OPEN ME
+                                    </Link>
                                 </div>
                             )
                         })
