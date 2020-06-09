@@ -6,40 +6,12 @@ function ChangePost(props) {
 
     const itemRef = firebase.database().ref(`books/${props.bookId}/postscript/${props.post.postId}`);
 
-    const handleDeletePost = e => {
-        e.preventDefault();
-        itemRef.remove();
-    }
+    // if statement to check which buttons to display
 
-    const handleUpdatePost = e => {
-        e.preventDefault();
-        console.log(e.currentTarget)
-        // getting references to buttons
-        let updateButton = e.currentTarget;
-        let modifyButton = document.querySelector(`button.modify.${props.post.postId}`);
-        let ty = document.querySelector('button.modify');
-        console.log(ty)
+    function displayButtons(updateButton, modifyButton) {
         // hidden textarea
         let textarea = document.querySelector(`textarea[id = '${props.post.postId}']`)
         // changing visibility
-        if (textarea.style.display === "none") {
-            textarea.style.display = "inline";
-            updateButton.style.display = "none";
-            modifyButton.style.display = "inline";
-        } else {
-            // textarea.style.display = "none";
-            updateButton.style.display = "inline";
-            modifyButton.style.display = "none";
-        }
-    }
-
-    const handleModifyPost = e => {
-        e.preventDefault();
-        itemRef.update({ postscript: `${props.newValue}` });
-
-        let modifyButton = e.currentTarget;
-        let updateButton = document.querySelector(`button.update.${props.post.postId}`);
-        let textarea = document.querySelector(`textarea[id = '${props.post.postId}']`)
         if (textarea.style.display === "none") {
             textarea.style.display = "inline";
             updateButton.style.display = "none";
@@ -51,9 +23,36 @@ function ChangePost(props) {
         }
     }
 
+    const handleDeletePost = e => {
+        e.preventDefault();
+        itemRef.remove();
+    }
+
+    const handleUpdatePost = e => {
+        e.preventDefault();
+        // getting references to the buttons
+        let updateButton = e.currentTarget;
+        let modifyButton = document.querySelector(`button.modify.${props.post.postId}`);
+
+        // passing references to displayButton
+        displayButtons(updateButton, modifyButton);
+    }
+
+    const handleModifyPost = e => {
+        e.preventDefault();
+        itemRef.update({ postscript: `${props.newValue}` });
+
+        // getting references to the buttons
+        let modifyButton = e.currentTarget;
+        let updateButton = document.querySelector(`button.update.${props.post.postId}`);
+
+        // passing references to displayButton
+        displayButtons(updateButton, modifyButton);
+    }
+
     return (
         <React.Fragment>
-
+            <br/>
             <button
                 onClick={handleUpdatePost}
                 className={`update ${props.post.postId}`}
@@ -75,7 +74,7 @@ function ChangePost(props) {
 
             <button
                 onClick={handleDeletePost}
-                className="delete"
+                className={`delete ${props.post.postId}`}
                 title="delete"
             >
                 <i className="far fa-trash-alt">
@@ -86,11 +85,9 @@ function ChangePost(props) {
     )
 }
 
+// styles inline to make funcion work
 const modifyButtonStyle = {
     display: 'none'
 }
 
 export default ChangePost;
-
-// update button
-// on click see post script text
