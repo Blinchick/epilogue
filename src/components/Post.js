@@ -36,7 +36,6 @@ class Post extends Component {
         return (
             <div>
                 {this.state.postscripts.map((post) => {
-                    console.log(post.postscripts)
                     return (
                         <p>{post.postscripts}</p>
                     )

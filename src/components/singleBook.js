@@ -33,7 +33,6 @@ class singleBook extends Component {
                 this.setState({
                     singleBook: books
                 });
-                console.log(books)
             }
         })
     }
@@ -63,30 +62,35 @@ class singleBook extends Component {
     
     render() {
         return (
-            <div className="wrapper singleBook">
-                {this.state.singleBook.map((book) => {
-                    return (
-                        <div className="post">
-                            <p><strong>{book.title}</strong> by <strong>{book.writer}</strong></p>
-                            <Post id={book.bookId}/>
-                        </div>
-                    )
-                })}
-                <Link exact to="/books">Back</Link>
-
+            <div className="wrapper">
+                <div className="singleBook">
                 <form action="" onSubmit={this.handleAdd}>
-                    <label htmlFor="postscript">Add Postscript</label>
-                    <textarea 
-                        name="postscript" 
-                        id="postsript" 
-                        cols="30" 
+                    <h2>ADD NEW POSTSCRIPT</h2>
+                    <label htmlFor="postscript" className="sr-only">Add Postscript</label>
+                    <textarea
+                        name="postscript"
+                        id="postsript"
+                        cols="30"
                         rows="10"
-                        // value={this.state.postscript}
+                        value={this.state.postscript}
                         onChange={this.handleChange}
                     >
                     </textarea>
                     <button type="submit">ADD</button>
                 </form>
+
+                {this.state.singleBook.map((book) => {
+                    return (
+                        <div className="post">
+                            <h2><strong>{book.title}</strong> by <strong>{book.writer}</strong></h2>
+                            <div className="singlePost">
+                                <Post id={book.bookId}/>
+                            </div>
+                        </div>
+                    )
+                })}
+                </div>
+                <Link className="linkBack" exact to="/books">Back</Link>
             </div>
         )
     }

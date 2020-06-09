@@ -23,6 +23,39 @@ html {
   background: #CAD2C5;
 }
 
+h2 {
+  font-size: 28px;
+  text-align: center;
+}
+
+p {
+  font-size: 18px;
+}
+
+a {
+  color: #000;
+}
+
+i {
+  font-size: 20px;
+}
+
+i:hover {
+  color: #32102F
+}
+
+button {
+  background-color: #32102F;
+  border: 2px solid #32102F;
+  border-radius: 10%;
+  padding: 1rem 2rem;
+  font-family: 'Special Elite', cursive;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  margin-left: 100px;
+}
+
 /* landing age styles */
 .landingPage {
   display: flex;
@@ -53,3 +86,47 @@ html {
   background-color: #D4C685;
   transform: rotate(-16.9deg);
 }
+
+/* books component */
+.displayBooks,
+.singleBook {
+  padding: 10rem;
+  margin-top: 5rem;
+  background-image: url(./assets/page.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 80vh;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Special Elite', cursive;
+  overflow-y: scroll;
+}
+
+.displayBooks form input {
+  width: 300px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #D4C685;
+  margin-bottom: 1rem;
+  padding: 2rem;
+  font-family: 'Special Elite', cursive;
+  font-size: 18px;
+}
+
+.oneBook div,
+.singlePost p {
+  background: #B8AC73;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+  max-height: 40vh;
+  min-width: 250px;
+  max-width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+

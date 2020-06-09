@@ -73,48 +73,54 @@ class Books extends Component {
     render() {
         return (
             <div className="wrapper">
-                <form action="">
-                    <label htmlFor="title">Add Book</label>
-                    <input 
-                        type="text" 
-                        name="title" 
-                        id="title"
-                        onChange={this.handleChange}
-                        value={this.state.title}
-                    />
-
-                    <label htmlFor="writer">Add Writer</label>
-                    <input
-                        type="text"
-                        name="writer"
-                        id="writer"
-                        onChange={this.handleChange}
-                        value={this.state.writer}
-                    />
-                    <button onClick={this.handleSubmit} type="submit">Submit</button>
-                </form>
-
-                <div 
-                    className="oneBook"
-                    onClick={this.handleBook}
-                >
+                <div className="wrapper displayBooks">
+                    <div 
+                        className="oneBook"
+                        onClick={this.handleBook}
+                    >
+                        <h2>MY BOOKS</h2>
                     {
                         this.state.allBooks.map((book) => {
                             return (
                                 <div className={`books + ${book.bookId}`} id={`${book.bookId}`}>
-                                    <p><strong>{book.title}</strong> by <strong>{book.writer}</strong></p>
+                                    <p><strong>{book.title}</strong> 
+                                    <br/> by <strong>{book.writer}</strong></p>
                                     <Link
                                         to={`/books/${book.bookId}`}
                                     >
-                                        OPEN ME
+                                        <i class="fas fa-pen-nib" title="write your P.S."></i>
                                     </Link>
                                 </div>
                             )
                         })
                     }
+                    </div>
+                    <form action="">
+                        <h2>Add Book</h2>
+                        <label htmlFor="title" className="sr-only">Add Book</label>
+                        <input
+                            type="text"
+                            name="title"
+                            id="title"
+                            onChange={this.handleChange}
+                            value={this.state.title}
+                            placeholder="Add Book"
+                        />
+                        <br />
+                        <label htmlFor="writer" className="sr-only">Add Writer</label>
+                        <input
+                            type="text"
+                            name="writer"
+                            id="writer"
+                            onChange={this.handleChange}
+                            value={this.state.writer}
+                            placeholder="Add Writer"
+                        />
+                        <br />
+                        <button onClick={this.handleSubmit} type="submit">Submit</button>
+                    </form>
                 </div>
-
-                <Link exact to="/">Back</Link>
+                <Link className="linkBack" exact to="/">Back</Link>
             </div>
 
             
