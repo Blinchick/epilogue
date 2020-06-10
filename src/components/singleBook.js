@@ -81,7 +81,7 @@ class singleBook extends Component {
                         )
                     })}
 
-                    <form action="" onSubmit={this.handleAdd}>
+                    <form className="addPost" action="" onSubmit={this.handleAdd}>
                         <h2>ADD NEW POSTSCRIPT</h2>
                         <label htmlFor="postscript" className="sr-only">Add Postscript</label>
                         <textarea

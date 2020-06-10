@@ -107,6 +107,10 @@ textarea {
   flex-direction: row-reverse;
 }
 
+.prevPage {
+  margin-bottom: 2rem;
+}
+
 .nextPage a,
 .prevPage a,
 button.submit{
@@ -243,6 +247,29 @@ button.submit {
     top: 40%;
     transform: scale(.8) rotate(-15deg);
   }
+
+  .displayBooks,
+  .singleBook {
+    height: 100vh;
+    flex-direction: column;
+    background-image: none;
+    background-color: #D5C97C;
+  }
+
+  .singleBook {
+    flex-direction: column-reverse;
+  }
+
+  .singlePost,
+  textarea {
+    max-height: 200px;
+  }
+
+  .displayBooks form,
+  form.addPost {
+    padding-bottom: 5rem;
+    border-bottom: 10px solid #B9AF6B;
+  }
 }
 
 @media (max-width:736px) {
@@ -267,10 +294,19 @@ button.submit {
   }
 
   .epilogue {
+    text-align: left;
     background-position: center;
+    padding: 5rem 15rem;
   }
   .note {
     position: static;
     z-index: -1;
+  }
+
+  .books,
+  .displayBooks form input,
+  .singleBook form textarea, 
+  .singlePost p {
+    width: 280px;
   }
 }

@@ -21,7 +21,6 @@ class App extends Component {
                 <div>
                   <h1>EPILOGUE</h1>
                   <h2>Book Diary</h2>
-                  <p>Your book stories live here</p>
                 </div>
               </div>
             </div>
