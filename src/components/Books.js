@@ -112,11 +112,12 @@ class Books extends Component {
                         onClick={this.handleBook}
                     >
                         <h2>MY BOOKS</h2>
+                        <div className="allBooks">
                     {
                         this.state.allBooks.map((book) => {
                             return (
                                 <div 
-                                    className={`books + ${book.bookId}`} 
+                                    className={`books ${book.bookId}`} 
                                     id={`${book.bookId}`}
                                 >
                                     <p><strong>{book.title} </strong> 
@@ -139,6 +140,7 @@ class Books extends Component {
                             )
                         })
                     }
+                        </div>
                     </div>
                 </div>
                 

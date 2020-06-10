@@ -148,6 +148,7 @@ button.submit:hover {
 
 .post h2 {
   text-align: left;
+  max-width: 300px;
 }
 
 .displayBooks a {
@@ -184,7 +185,7 @@ button.submit:hover {
 .singleBook form textarea,
 .singlePost p {
   width: 300px;
-  height: 75px;
+  height: AUTO;
 }
 
 .singleBook form textarea {
@@ -195,6 +196,13 @@ button.submit:hover {
   padding: 1rem;
   font-family: 'Special Elite', cursive;
   font-size: 18px;
+  overflow-y: scroll;
+}
+
+/* solving display issue */
+.singlePost,
+.allBooks {
+  max-height: 400px;
   overflow-y: scroll;
 }
 

@@ -2,7 +2,6 @@ import React from 'react';
 import firebase from '../firebase';
 
 function ChangePost(props) {
-    console.log(props)
 
     const itemRef = firebase.database().ref(`books/${props.bookId}/postscript/${props.post.postId}`);
 
@@ -39,14 +38,13 @@ function ChangePost(props) {
 
     const handleModifyPost = e => {
         e.preventDefault();
-
         
         // if user hasn't made any changes, we want to update with the value from state
-        if (props.newValue === undefined) {
-            itemRef.update({ postscript: `${props.post.postscripts}` });
-        } else {
-            itemRef.update({ postscript: `${props.newValue}` });
-        }
+        // if (props.newValue === null) {
+        //     console.log(itemRef);
+        // } else {
+        // }
+        itemRef.update({ postscript: `${props.newValue}` });
 
         // getting references to the buttons
         let modifyButton = e.currentTarget;
