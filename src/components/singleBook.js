@@ -17,12 +17,11 @@ class singleBook extends Component {
         // set up listener to listen for firebase updates
         const dbRef = firebase.database().ref('/books');
         dbRef.on('value', (result) => {
-            
             let data = result.val();
             let books = [];
             // pushing books from firebase to local state
             for (let i in data) {
-                if('/books/' + i === `${window.location.pathname}`) {
+                if ('/books/' + i === `${this.props.location.pathname}`) {
                     books.push({
                         bookId: i,
                         title: data[i].title,

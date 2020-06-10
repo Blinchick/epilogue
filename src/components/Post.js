@@ -50,7 +50,7 @@ class Post extends Component {
             <div>
                 {this.state.postscripts.map((post) => {
                     return (
-                        <React.Fragment>
+                        <React.Fragment key={post.postId}>
                             <p>{post.postscripts}</p>
                             <form action="">
                                 <label htmlFor="update" className="sr-only">Update</label>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, HashRouter,Route, Link } from "react-router-dom";
 import Books from './components/Books';
 import singleBook from './components/singleBook'
 import './App.css';
@@ -7,7 +7,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <HashRouter basename="/">
         <Route exact path="/">
           <div className="wrapper">
             <div className="landingPage">
@@ -35,7 +35,7 @@ class App extends Component {
 
         <Route exact path="/books" component={Books} />
         <Route path="/books/:id" component={singleBook} />
-      </Router>
+      </HashRouter>
     )
   }
 }

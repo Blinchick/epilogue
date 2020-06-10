@@ -119,6 +119,7 @@ class Books extends Component {
                                 <div 
                                     className={`books ${book.bookId}`} 
                                     id={`${book.bookId}`}
+                                    key={book.bookId}
                                 >
                                     <p><strong>{book.title} </strong> 
                                     <br/> 
