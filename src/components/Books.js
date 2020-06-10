@@ -71,30 +71,7 @@ class Books extends Component {
     render() {
         return (
             <div className="wrapper">
-                <div className="wrapper displayBooks">
-                    <div 
-                        className="oneBook"
-                        onClick={this.handleBook}
-                    >
-                        <h2>MY BOOKS</h2>
-                    {
-                        this.state.allBooks.map((book) => {
-                            return (
-                                <div className={`books + ${book.bookId}`} id={`${book.bookId}`}>
-                                    <p><strong>{book.title}</strong> 
-                                    <br/> by <strong>{book.writer}</strong></p>
-                                    <Link
-                                        to={`/books/${book.bookId}`}
-                                    >
-                                        <i className="fas fa-pen-nib" title="write your P.S."></i>
-
-                                    </Link>
-                                    <Delete book={book}/>
-                                </div>
-                            )
-                        })
-                    }
-                    </div>
+                <div className="displayBooks">
                     <form action="">
                         <h2>Add Book</h2>
                         <label htmlFor="title" className="sr-only">Add Book</label>
@@ -105,6 +82,8 @@ class Books extends Component {
                             onChange={this.handleChange}
                             value={this.state.title}
                             placeholder="Add Book"
+                            // submit an empty value
+                            minLength="5"
                         />
                         <br />
                         <label htmlFor="writer" className="sr-only">Add Writer</label>
@@ -115,12 +94,57 @@ class Books extends Component {
                             onChange={this.handleChange}
                             value={this.state.writer}
                             placeholder="Add Writer"
+                            // user can't submit an empty value
+                            minLength="5"
                         />
                         <br />
-                        <button onClick={this.handleSubmit} type="submit" className="submit">Submit</button>
+                        <button 
+                            onClick={this.handleSubmit} 
+                            type="submit" 
+                            className="submit"
+                        >
+                        Submit
+                        </button>
                     </form>
+
+                    <div 
+                        className="oneBook"
+                        onClick={this.handleBook}
+                    >
+                        <h2>MY BOOKS</h2>
+                    {
+                        this.state.allBooks.map((book) => {
+                            return (
+                                <div 
+                                    className={`books + ${book.bookId}`} 
+                                    id={`${book.bookId}`}
+                                >
+                                    <p><strong>{book.title} </strong> 
+                                    <br/> 
+                                    by
+                                    <strong> {book.writer}</strong></p>
+                                    <div>
+                                        <Link
+                                            to={`/books/${book.bookId}`}
+                                        >
+                                            <i 
+                                                className="fas fa-pen-nib"  title="write your P.S."
+                                            >
+                                            </i>
+                                        </Link>
+
+                                        <Delete book={book}/>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                    </div>
                 </div>
-                <Link className="linkBack" exact to="/">Back</Link>
+                
+                <div className="prevPage">
+                    <Link className="linkBack" exact to="/">Back</Link>
+                </div>
             </div>
 
             

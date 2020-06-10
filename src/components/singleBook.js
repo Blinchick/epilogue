@@ -64,33 +64,46 @@ class singleBook extends Component {
         return (
             <div className="wrapper">
                 <div className="singleBook">
-                <form action="" onSubmit={this.handleAdd}>
-                    <h2>ADD NEW POSTSCRIPT</h2>
-                    <label htmlFor="postscript" className="sr-only">Add Postscript</label>
-                    <textarea
-                        name="postscript"
-                        id="postsript"
-                        cols="30"
-                        rows="10"
-                        value={this.state.postscript}
-                        onChange={this.handleChange}
-                    >
-                    </textarea>
-                    <button type="submit" className="submit">ADD</button>
-                </form>
 
-                {this.state.singleBook.map((book) => {
-                    return (
-                        <div className="post">
-                            <h2><strong>{book.title}</strong> by <strong>{book.writer}</strong></h2>
-                            <div className="singlePost">
-                                <Post id={book.bookId}/>
+                    {this.state.singleBook.map((book) => {
+                        return (
+                            <div className="post">
+                                <h2>
+                                    Title: {book.title} 
+                                    <br/>
+                                    Writer: {book.writer}</h2>
+                                <div className="singlePost">
+
+                                    <Post id={book.bookId} />
+
+                                </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+
+                    <form action="" onSubmit={this.handleAdd}>
+                        <h2>ADD NEW POSTSCRIPT</h2>
+                        <label htmlFor="postscript" className="sr-only">Add Postscript</label>
+                        <textarea
+                            name="postscript"
+                            id="postsript"
+                            cols="30"
+                            rows="10"
+                            placeholder="Type here anything"
+                            minLength="5"
+                            value={this.state.postscript}
+                            onChange={this.handleChange}
+                        >
+                        </textarea>
+                        <br/>
+                        <button type="submit" className="submit">SUBMIT</button>
+                    </form>
+
                 </div>
-                <Link className="linkBack" exact to="/books">Back</Link>
+                
+                <div className="prevPage">
+                    <Link className="linkBack" exact to="/books">Back</Link>
+                </div>
             </div>
         )
     }

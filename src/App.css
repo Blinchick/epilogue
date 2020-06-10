@@ -23,9 +23,20 @@ html {
   background: #CAD2C5;
 }
 
+h1 {
+  font-family: 'Special Elite', cursive;
+  font-size: 34px;
+  margin-bottom: 0;
+}
+
 h2 {
-  font-size: 28px;
-  text-align: center;
+  font-family: 'Special Elite', cursive;
+  font-size: 24px;
+  margin: 0;
+}
+
+h3 {
+  font-size: 22px;
 }
 
 p {
@@ -33,7 +44,7 @@ p {
 }
 
 a {
-  color: #000;
+  text-decoration: none;
 }
 
 i {
@@ -54,50 +65,93 @@ textarea {
 /* landing age styles */
 .landingPage {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  padding: 3rem 0;
+  padding: 3rem 2rem;
+  height: 90vh;
 }
 
-.book {
-  width: 600px;
-  height: 700px;
-  background: #5C080E;
-  border-radius: 0px 10px 10px 0px;
+.epilogue {
+  height: 80vh;
+  width: 60vh;
+  background: url('./assets/Book.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  padding: 10rem 5rem;
 }
 
-.bookmark {
-  position: absolute;
-  width: 75px;
-  height: 341px;
-  left: 682px;
-  top: 66px;
-  background: rgba(4, 5, 46, 0.7);
+.epilogue p {
+  font-style: italic;
 }
 
 .note {
-  width: 400px;
-  height: 400px;
+  width: 350px;
+  padding: 3rem;
   background-color: #D4C685;
   transform: rotate(-16.9deg);
+}
+
+.nextPage,
+.prevPage {
+  display: flex;
+}
+
+  .nextPage {
+  flex-direction: row-reverse;
+}
+
+.nextPage a,
+.prevPage a,
+button.submit{
+  font-family: Special Elite;
+  font-size: 20px;
+  padding: 1rem;
+  color: #32102F;
+  border: 2px solid #32102F;
+  transition: .5s ease-in-out;
+  background-color: transparent;
+}
+
+.nextPage a:hover,
+.prevPage a:hover,
+button.submit:hover {
+  color: #E5E5E5;
+  background-color: #32102F;
 }
 
 /* books component */
 .displayBooks,
 .singleBook {
-  padding: 10rem;
-  margin-top: 5rem;
+  height: 80vh;
+  margin: 5rem 0;
   background-image: url(./assets/page.png);
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
-  height: 80vh;
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  align-items: center;
   font-family: 'Special Elite', cursive;
-  overflow-y: scroll;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.displayBooks h2,
+.singleBook h2{
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1rem 0;
+}
+
+.post h2 {
+  text-align: left;
+}
+
+.displayBooks a {
+  color: #000;
 }
 
 .displayBooks form input {
@@ -105,43 +159,63 @@ textarea {
   height: 30px;
   border-radius: 10px;
   background-color: #D4C685;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
   padding: 2rem;
   font-family: 'Special Elite', cursive;
   font-size: 18px;
 }
 
-.oneBook div,
-.singlePost p,
-textarea {
-  background: #B8AC73;
-  border-radius: 10px;
+.books{
   padding: 1rem;
   margin: 1rem 0;
-  min-width: 300px;
+  width: 320px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #32102F;
 }
 
-/* action buttons and form fields */
+.books p {
+  width: 70%;
+  /* if user enters long name */
+  overflow-y: scroll;
+}
+
+.singleBook form textarea,
+.singlePost p {
+  width: 300px;
+  height: 75px;
+}
+
+.singleBook form textarea {
+  border-color: #32102F;
+  border-radius: 10px;
+  background-color: #D4C685;
+  margin: 1rem 0;
+  padding: 1rem;
+  font-family: 'Special Elite', cursive;
+  font-size: 18px;
+  overflow-y: scroll;
+}
+
+.singlePost p{
+  background-color: #B8AC73;
+  padding: 1rem;
+  overflow-y: scroll;
+}
+
+/* action buttons */
 
 button.delete,
 button.update,
 button.modify {
   border: none;
-  background-color: #B8AC73;
+  background-color: transparent;
   cursor: pointer;
 }
 
 button.submit {
-  background-color: #32102F;
-  border: 2px solid #32102F;
-  border-radius: 10%;
-  padding: 1rem 2rem;
-  font-family: 'Special Elite', cursive;
-  font-size: 20px;
-  color: white;
   cursor: pointer;
+  align-self: center;
   margin-left: 100px;
 }

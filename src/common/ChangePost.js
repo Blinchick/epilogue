@@ -6,8 +6,7 @@ function ChangePost(props) {
 
     const itemRef = firebase.database().ref(`books/${props.bookId}/postscript/${props.post.postId}`);
 
-    // if statement to check which buttons to display
-
+    // conditionsl statement to check which buttons to display
     function displayButtons(updateButton, modifyButton) {
         // hidden textarea
         let textarea = document.querySelector(`textarea[id = '${props.post.postId}']`)
@@ -40,7 +39,14 @@ function ChangePost(props) {
 
     const handleModifyPost = e => {
         e.preventDefault();
-        itemRef.update({ postscript: `${props.newValue}` });
+
+        
+        // if user hasn't made any changes, we want to update with the value from state
+        if (props.newValue === undefined) {
+            itemRef.update({ postscript: `${props.post.postscripts}` });
+        } else {
+            itemRef.update({ postscript: `${props.newValue}` });
+        }
 
         // getting references to the buttons
         let modifyButton = e.currentTarget;

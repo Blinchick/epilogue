@@ -9,21 +9,29 @@ class App extends Component {
     return (
       <Router>
         <Route exact path="/">
-          <div className="landingPage wrapper">
-            <div className="note">
-              <h3>Hello there</h3>
-              <p>If you like to read, you probably have many things to say about books. Either you have a strong opinion about character, story or just want to save your favourite quote - epilogue is here for you!</p>
-              <p>It's online book diary created for book lovers.</p>
+          <div className="wrapper">
+            <div className="landingPage">
+              <div className="note">
+                <h3>Hello there!</h3>
+                <p>If you like to read, you probably have many things to say about books. Either you have a strong opinion about character, story or just want to save your favourite quote - epilogue is here for you!</p>
+                <p>It's online book diary created by book lover for book lovers.</p>
+              </div>
+
+              <div className="epilogue">
+                <div>
+                  <h1>EPILOGUE</h1>
+                  <h2>Book Diary</h2>
+                  <p>Your book stories live here</p>
+                </div>
+              </div>
             </div>
 
-            <div className="book">
-              <div>
-                <h1>EPILOGUE</h1>
-                <h2>Book Diary</h2>
-              </div>
+            <div className="nextPage">
               <Link to="/books">TURN THE PAGE</Link>
             </div>
+            
           </div>
+
         </Route>
 
         <Route exact path="/books" component={Books} />
