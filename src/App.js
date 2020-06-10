@@ -13,8 +13,8 @@ class App extends Component {
             <div className="landingPage">
               <div className="note">
                 <h3>Hello there!</h3>
-                <p>If you like to read, you probably have many things to say about books. Either you have a strong opinion about character, story or just want to save your favourite quote - epilogue is here for you!</p>
-                <p>It's online book diary created by book lover for book lovers.</p>
+                <p>If you like to read, you probably have many things to say about books. Either you have a strong opinion about character, story or just want to save your favourite quote.</p>
+                <p>Epilogue is online book diary created by book lover for book lovers.</p>
               </div>
 
               <div className="epilogue">

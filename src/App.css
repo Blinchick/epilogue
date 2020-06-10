@@ -90,10 +90,12 @@ textarea {
 }
 
 .note {
-  width: 350px;
-  padding: 3rem;
+  max-width: 350px;
+  padding: 1rem 2rem;
   background-color: #D4C685;
-  transform: rotate(-16.9deg);
+  transform: rotate(-15deg);
+  z-index: -1;
+  border: 1px solid rgb(44, 41, 27);
 }
 
 .nextPage,
@@ -226,4 +228,49 @@ button.submit {
   cursor: pointer;
   align-self: center;
   margin-left: 100px;
+}
+
+/* media */
+
+@media (max-width:980px) {
+  .landingPage {
+    position: relative;
+  }
+
+  .note {
+    position: absolute;
+    z-index: 1;
+    top: 40%;
+    transform: scale(.8) rotate(-15deg);
+  }
+}
+
+@media (max-width:736px) {
+
+}
+
+@media (max-width:480px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 15px;
+  }
+
+  .landingPage {
+    flex-direction: column;
+  }
+
+  .epilogue {
+    background-position: center;
+  }
+  .note {
+    position: static;
+    z-index: -1;
+  }
 }
