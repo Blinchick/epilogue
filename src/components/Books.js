@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
-import firebase from '../firebase.js';
-import Delete from '../common/Delete';
+import React, { useState, useEffect, Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import booksService from '../services/books.service.js';
 
 class Books extends Component {
     constructor() {
@@ -12,60 +10,60 @@ class Books extends Component {
             writer: "",
             poscript: "",
             // to display books
-            allBooks: [] 
+            allBooks: []
         };
     }
 
-    // displaying books currently in the database
     componentDidMount() {
-        //set up listener to firebase database
-
-        const dbRef = firebase.database().ref('/books');
-        dbRef.on('value', (result) => {
-
-            let data = result.val();
-            let books = [];
-
-            for (let i in data) {
-                books.push({
-                    bookId: i,
-                    title: data[i].title,
-                    writer: data[i].writer
-                });
-
-                this.setState({
-                    allBooks: books
-                });
-            }
-        })
+        booksService.getAll().on("value", this.onDataChange);
     }
 
     componentWillUnmount() {
-        const dbRef = firebase.database().ref('/books');
-        dbRef.off()
+        booksService.getAll().off("value", this.onDatachange);
     }
 
-    //state updates when user's making changes
+    onDataChange = res => {
+        let books = [];
+        let data = res.val()
+        console.log(data)
+        for (let i in data) {
+            books.push({
+                bookId: i,
+                title: data[i].title,
+                writer: data[i].writer
+            });
+        }
+        this.setState({
+            allBooks: books
+        })
+    }
+
     handleChange = e => {
         this.setState({
             [e.target.name]: e.target.value
         });
     }
 
-    //on submit we are saving our form to firebase
     handleSubmit = e => {
         e.preventDefault();
-        const newBook = firebase.database().ref('/books');
-        //adding to firebase
-        newBook.push({
+        let newBook = {
             title: this.state.title,
             writer: this.state.writer
-        });
-        //clearing input
-        this.setState({
-            title: "",
-            writer: ""
-        })
+        }
+        booksService.create(newBook)
+            .then(() => {
+                this.setState({
+                    title: "",
+                    writer: ""
+                })
+            }).catch((e) => {
+                console.log(e)
+            })
+    }
+
+    handleDelete = (e) => {
+        e.preventDefault();
+        booksService.delete(`${e.currentTarget.name}`);
     }
 
     render() {
@@ -98,59 +96,59 @@ class Books extends Component {
                             minLength="5"
                         />
                         <br />
-                        <button 
-                            onClick={this.handleSubmit} 
-                            type="submit" 
+                        <button
+                            onClick={this.handleSubmit}
+                            type="submit"
                             className="submit"
                         >
-                        Submit
+                            Submit
                         </button>
                     </form>
 
-                    <div 
+                    <div
                         className="oneBook"
                         onClick={this.handleBook}
                     >
                         <h2>MY BOOKS</h2>
                         <div className="allBooks">
-                    {
-                        this.state.allBooks.map((book) => {
-                            return (
-                                <div 
-                                    className={`books ${book.bookId}`} 
-                                    id={`${book.bookId}`}
-                                    key={book.bookId}
-                                >
-                                    <p><strong>{book.title} </strong> 
-                                    <br/> 
+                            {
+                                this.state.allBooks.map((book) => {
+                                    return (
+                                        <div
+                                            className={`books ${book.bookId}`}
+                                            id={`${book.bookId}`}
+                                            key={book.bookId}
+                                        >
+                                            <p><strong>{book.title} </strong>
+                                                <br />
                                     by
                                     <strong> {book.writer}</strong></p>
-                                    <div>
-                                        <Link
-                                            to={`/books/${book.bookId}`}
-                                        >
-                                            <i 
-                                                className="fas fa-pen-nib"  title="write your P.S."
-                                            >
-                                            </i>
-                                        </Link>
+                                            <div>
+                                                <Link
+                                                    to={`/books/${book.bookId}`}
+                                                >
+                                                    <i
+                                                        className="fas fa-pen-nib" title="write your P.S."
+                                                    >
+                                                    </i>
+                                                </Link>
 
-                                        <Delete book={book}/>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
+                                                <button onClick={this.handleDelete} className="delete" title="delete" name={`${book.bookId}`}><i className="far fa-trash-alt"></i></button>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="prevPage">
                     <Link className="linkBack" exact to="/">Back</Link>
                 </div>
             </div>
 
-            
+
         )
     }
 }

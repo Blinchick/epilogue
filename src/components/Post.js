@@ -46,9 +46,11 @@ class Post extends Component {
     }
 
     render() {
+        const { postscripts, singleBookId, update } = this.state;
+
         return (
             <div>
-                {this.state.postscripts.map((post) => {
+                {postscripts.map((post) => {
                     return (
                         <React.Fragment key={post.postId}>
                             <p>{post.postscripts}</p>
@@ -70,8 +72,8 @@ class Post extends Component {
                                 </textarea>
                                 <ChangePost 
                                     post={post}
-                                    bookId={this.state.singleBookId}
-                                    newValue={this.state.update}
+                                    bookId={singleBookId}
+                                    newValue={update}
                                 />
                             </form>
                         </React.Fragment>

@@ -52,10 +52,10 @@ class singleBook extends Component {
             postscript: this.state.postscript
         });
 
-        //clearing input
-        this.setState({
-            postscript: ""
-        })
+        // clearing input
+        // this.setState({
+        //     postscript: ""
+        // })
     }
 
     
