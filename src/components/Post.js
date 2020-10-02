@@ -43,8 +43,9 @@ class Post extends Component {
         });
     }
 
+
     handleDeletePost = e => {
-        e.preventDefault();
+        // e.preventDefault();
 
         let postId = e.currentTarget.className.split(' ').splice(1).join(' ');
 
@@ -97,66 +98,74 @@ class Post extends Component {
     render() {
         const { postscripts, singleBookId, update } = this.state;
 
-        return (
-            <div>
-                {postscripts.map((post) => {
-                    return (
-                        <React.Fragment key={post.postId}>
-                            <p>{post.postscripts}</p>
-                            <form action="">
-                                <label htmlFor="update" className="sr-only">Update</label>
-                                <textarea
-                                // inline style to make handleModify works
-                                    style={textareaStyle}
-                                    className="update" 
-                                    name="update"
-                                    // need to access id for modifying
-                                    id={post.postId}
-                                    cols="10" 
-                                    rows="5"
-                                    onChange={this.handleChange}
-                                    // using defaultValue to allow changes in a textfield
-                                    defaultValue={post.postscripts}
-                                >
-                                </textarea>
-
-                                <React.Fragment>
-                                    <br />
-                                    <button
-                                        className={`update ${post.postId}`}
-                                        onClick={this.handleUpdatePost}
-                                        title="update P.S."
-                                    // id={props.post.postId}
+        if (!postscripts.length) {
+            return (
+                <div>
+                    <p>So how was this book? Add something you liked (or didn't) about it.</p>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    {postscripts.map((post) => {
+                        return (
+                            <React.Fragment key={post.postId}>
+                                <p>{post.postscripts}</p>
+                                <form action="">
+                                    <label htmlFor="update" className="sr-only">Update</label>
+                                    <textarea
+                                    // inline style to make handleModify works
+                                        style={textareaStyle}
+                                        className="update" 
+                                        name="update"
+                                        // need to access id for modifying
+                                        id={post.postId}
+                                        cols="10" 
+                                        rows="5"
+                                        onChange={this.handleChange}
+                                        // using defaultValue to allow changes in a textfield
+                                        defaultValue={post.postscripts}
                                     >
-                                        <i className="far fa-edit"></i>
-                                    </button>
-
-                                    <button
-                                        // inline style to make handleModify works
-                                        style={modifyButtonStyle}
-                                        className={`modify ${post.postId}`}
-                                        onClick={this.handleUpdatePost}
-                                        title="done"
-                                    >
-                                        <i className="far fa-check-square"></i>
-                                    </button>
-
-                                    <button
-                                        className={`delete ${post.postId}`}
-                                        onClick={this.handleDeletePost}
-                                        title="delete"
-                                    >
-                                        <i className="far fa-trash-alt">
-                                        </i>
-                                    </button>
-
-                                </React.Fragment>
-                            </form>
-                        </React.Fragment>
-                    )
-                })}
-            </div>
-        )
+                                    </textarea>
+    
+                                    <React.Fragment>
+                                        <br />
+                                        <button
+                                            className={`update ${post.postId}`}
+                                            onClick={this.handleUpdatePost}
+                                            title="update P.S."
+                                        // id={props.post.postId}
+                                        >
+                                            <i className="far fa-edit"></i>
+                                        </button>
+    
+                                        <button
+                                            // inline style to make handleModify works
+                                            style={modifyButtonStyle}
+                                            className={`modify ${post.postId}`}
+                                            onClick={this.handleUpdatePost}
+                                            title="done"
+                                        >
+                                            <i className="far fa-check-square"></i>
+                                        </button>
+    
+                                        <button
+                                            className={`delete ${post.postId}`}
+                                            onClick={this.handleDeletePost}
+                                            title="delete"
+                                        >
+                                            <i className="far fa-trash-alt">
+                                            </i>
+                                        </button>
+    
+                                    </React.Fragment>
+                                </form>
+                            </React.Fragment>
+                        )
+                    })}
+                </div>
+            )
+        }
     }
 
 }
