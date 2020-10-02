@@ -82,7 +82,6 @@ class Post extends Component {
             this.state.postscripts.map(post => post.postId === postId
                 ? currentPost = post.postscripts
                 : null);
-            console.log(currentPost)
 
             !this.state.update
             ? itemRef.update({ postscript: `${currentPost}` })

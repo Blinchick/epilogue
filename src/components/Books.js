@@ -25,7 +25,6 @@ class Books extends Component {
     onDataChange = res => {
         let books = [];
         let data = res.val()
-        console.log(data)
         for (let i in data) {
             books.push({
                 bookId: i,
