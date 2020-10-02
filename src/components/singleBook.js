@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../firebase.js';
+import booksService from '../services/books.service'
 import Post from './Post';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -12,50 +13,50 @@ class singleBook extends Component {
         };
     }
 
-    // retriving book details from firebase
     componentDidMount() {
-        // set up listener to listen for firebase updates
-        const dbRef = firebase.database().ref('/books');
-        dbRef.on('value', (result) => {
-            let data = result.val();
-            let books = [];
-            // pushing books from firebase to local state
-            for (let i in data) {
-                if ('/books/' + i === `${this.props.location.pathname}`) {
-                    books.push({
-                        bookId: i,
-                        title: data[i].title,
-                        writer: data[i].writer
-                    });
-                }
-                
-                this.setState({
-                    singleBook: books
-                });
-            }
-        })
+        booksService.getAll().on('value', this.onDataChange)
     }
-    //state updates when user's making changes
+
+    componentWillUnmount() {
+        booksService.getAll().off('value', this.onDataChange)
+    }
+    
     handleChange = e => {
         this.setState({
             [e.target.name]: e.target.value
         });
     }
 
+    onDataChange = res => {
+        let data = res.val();
+        let books = [];
+        // pushing books from firebase to local state
+        for (let i in data) {
+            if ('/books/' + i === `${this.props.location.pathname}`) {
+                books.push({
+                    bookId: i,
+                    title: data[i].title,
+                    writer: data[i].writer
+                });
+            }
+
+            this.setState({
+                singleBook: books
+            });
+        }
+    }
+    
     handleAdd = e => {
         e.preventDefault();
         const newPost = firebase.database().ref(`/books/${this.state.singleBook[0].bookId}`).child('/postscript');
-        //just to alert user that it's submitted
-        // alert('Submited!');
-        // adding to firebase
         newPost.push({
             postscript: this.state.postscript
         });
 
-        // clearing input
-        // this.setState({
-        //     postscript: ""
-        // })
+
+        this.setState({
+            postscript: ""
+        })
     }
 
     
